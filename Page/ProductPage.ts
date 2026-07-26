@@ -51,19 +51,24 @@ export class ProductPage extends BasePage {
     }
 
    async searchProduct(productName: string) {
-    await expect(this.searchInput).toBeVisible();
+  await expect(this.searchInput).toBeVisible();
 
-    await this.searchInput.fill(productName);
-    await expect(this.searchInput).toHaveValue(productName);
+  // fill() sets the value directly without firing per-keystroke events;
+  // pressSequentially() simulates real typing, which this site's JS
+  // may depend on to track the search term
+  await this.searchInput.click();
+  await this.searchInput.pressSequentially(productName, { delay: 50 });
+  await expect(this.searchInput).toHaveValue(productName);
 
-    await this.searchBtn.click();
+  await this.searchBtn.click();
+console.log("URL after search click:", this.page.url());
 
-    await expect(this.searchedProductsTitle).toHaveText(
-        "Searched Products",
-        { timeout: 10000 }
-    );
+  await expect(this.searchedProductsTitle).toHaveText(
+    "Searched Products",
+    { timeout: 10000 }
+  );
 
-    await expect(this.productCards.first()).toBeVisible();
+  await expect(this.productCards.first()).toBeVisible();
 }
    async verifySearchResults() {
     const count = await this.productCards.count();

@@ -9,15 +9,15 @@ import { InvoicePage } from "../Page/InvoicePage";
 
 test("Verify user can download invoice", async ({ page }) => {
 
-    const login = new loginPage(page);
+    // const login = new loginPage(page);
     const cart = new CartPage(page);
     const checkout = new CheckoutPage(page);
     const payment = new PaymentPage(page);
     const orderPlaced = new InvoicePage(page);
 
-    // Login
-    await login.navigate('https://automationexercise.com/signup');
-    await login.login("johndoe75@gmail.com", "JD@12345");
+    // // Login
+     await page.goto('https://automationexercise.com/signup');
+    // await login.login("johndoe75@gmail.com", "JD@12345");
 
     // Cart
     await cart.clearCart();

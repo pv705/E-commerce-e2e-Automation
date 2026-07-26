@@ -17,14 +17,14 @@ test.describe("Search Module", () => {
 
         await page.goto("https://automationexercise.com");
 
-        const login = new loginPage(page);
+        // const login = new loginPage(page);
 
-        await login.navigateTologinPage();
-        await login.login(
-            "johndoe75@gmail.com",
-            "JD@12345"
-        );
-        await login.verifySuccessfulLogin();
+        // await login.navigateTologinPage();
+        // await login.login(
+        //     "johndoe75@gmail.com",
+        //     "JD@12345"
+        // );
+        // await login.verifySuccessfulLogin();
 
         const cart = new CartPage(page);
         await cart.clearCart();

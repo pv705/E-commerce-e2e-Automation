@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import "dotenv/config";
 
 export default defineConfig({
   testDir: "./",
@@ -9,7 +10,7 @@ export default defineConfig({
     "test-results"
   ],
 
-  fullyParallel: true,
+  fullyParallel: false,
 
   forbidOnly: !!process.env.CI,
 
@@ -17,7 +18,8 @@ export default defineConfig({
 
   workers: process.env.CI ? 1 : undefined,
 
-  reporter: "html",
+  reporter: [["html"],
+             ["list"]],
 
   use: {
     trace: "on-first-retry",
@@ -53,7 +55,7 @@ export default defineConfig({
     },
     dependencies: ["setup"],
   },
-]
+],
 
   // webServer: {
   //   command: "npm run start",
